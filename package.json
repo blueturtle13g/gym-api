@@ -1,0 +1,62 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "jest ./__tests__ --runInBand --forceExit",
+    "start": "npm run prod",
+    "prod": "NODE_ENV=production npm-run-all build server",
+    "server": "node ./dist/app",
+    "transpile": "babel ./src --out-dir dist",
+    "clean": "rimraf dist",
+    "build": "npm-run-all clean transpile",
+    "dev": "npm-run-all transpile server",
+    "nodemon": "nodemon",
+    "prettier": "prettier --write ./src ./__tests__"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "axios": "^0.19.2",
+    "bcrypt": "^4.0.1",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "firebase-admin": "^8.12.1",
+    "helmet": "^3.22.0",
+    "jest": "^26.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.12",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.2",
+    "qs": "^6.9.4",
+    "redis": "^3.0.2",
+    "rimraf": "^3.0.2",
+    "socket.io": "^2.3.0",
+    "socketio-jwt": "^4.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@types/jest": "^25.2.3",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.2",
+    "nodemon": "^2.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.5"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testTimeout": 20000
+  },
+  "lint-staged": {
+    "*.js": "npm run test",
+    "*.{js,md}": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
